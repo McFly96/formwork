@@ -31,8 +31,30 @@
   color-scheme: light;
 }
 
+/* Dark theme: chosen in the toolbar, or from the system when nothing was chosen. */
+:root[data-theme='dark'] {
+  --desk: #1a1923;
+  --paper: #24222f;
+  --panel: #1f1e29;
+  --ink: #ece9f5;
+  --muted: #a19db3;
+  --line: #34313f;
+  --line-strong: #4a4658;
+  --accent: #b6abff;
+  --accent-ink: #1a1923;
+  --accent-soft: #2f2b47;
+  --highlight: #36321f;
+  --danger: #f19aaa;
+  --lavender: #34305a;
+  --mint: #234036;
+  --peach: #47332a;
+  --sky: #233847;
+  --butter: #423c22;
+  --rose: #452a35;
+  color-scheme: dark;
+}
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme='light']) {
     --desk: #1a1923;
     --paper: #24222f;
     --panel: #1f1e29;
@@ -236,6 +258,10 @@ input[type='radio'] {
 }
 .toolbar-group.end {
   margin-left: auto;
+}
+.theme-toggle {
+  font-size: 16px;
+  color: var(--ink);
 }
 
 /* Palette */

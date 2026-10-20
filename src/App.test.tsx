@@ -57,3 +57,19 @@ describe('App', () => {
     expect(cardLabels()).not.toContain('Email')
   })
 })
+
+describe('theme toggle', () => {
+  beforeEach(() => {
+    localStorage.clear()
+    delete document.documentElement.dataset.theme
+  })
+
+  it('switches theme and remembers it', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+    await user.click(screen.getByRole('button', { name: 'Switch to dark theme' }))
+    expect(document.documentElement.dataset.theme).toBe('dark')
+    expect(localStorage.getItem('formwork:theme')).toBe('dark')
+    expect(screen.getByRole('button', { name: 'Switch to light theme' })).toBeInTheDocument()
+  })
+})

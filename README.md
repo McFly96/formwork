@@ -20,6 +20,7 @@ then export it as JSON or share it as a link.
 | **Import / export** | JSON download and upload. Imported files are checked and cleaned, with errors written for people ("Field 3 has an unknown type") |
 | **Share link** | The form, deflated and base64url-encoded in the URL hash. Nothing is uploaded anywhere |
 | **Templates** | Event registration and job application, both using chained rules |
+| **Light / dark theme** | Follows the system until you pick one in the toolbar; the choice is remembered and applied before the first paint |
 
 ## Getting started
 

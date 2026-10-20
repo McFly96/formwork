@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import type { Theme } from '../theme'
 
 export type Mode = 'build' | 'preview'
 
@@ -13,13 +14,16 @@ interface Props {
   onImport: (file: File) => void
   onExport: () => void
   onShare: () => void
+  theme: Theme
+  onThemeChange: (theme: Theme) => void
 }
 
 const isMac = typeof navigator !== 'undefined' && /Mac|iPhone|iPad/.test(navigator.platform)
 const mod = isMac ? '⌘' : 'Ctrl+'
 
 export default function Toolbar(props: Props) {
-  const { mode, onModeChange, canUndo, canRedo, onUndo, onRedo, onNew, onImport, onExport, onShare } = props
+  const { mode, onModeChange, canUndo, canRedo, onUndo, onRedo, onNew, onImport, onExport, onShare, theme, onThemeChange } = props
+  const nextTheme = theme === 'dark' ? 'light' : 'dark'
   const fileRef = useRef<HTMLInputElement>(null)
 
   return (
@@ -66,6 +70,15 @@ export default function Toolbar(props: Props) {
         />
         <button type="button" className="ghost" onClick={onExport}>
           Export JSON
+        </button>
+        <button
+          type="button"
+          className="icon theme-toggle"
+          onClick={() => onThemeChange(nextTheme)}
+          aria-label={`Switch to ${nextTheme} theme`}
+          title={`Switch to ${nextTheme} theme`}
+        >
+          {theme === 'dark' ? '☀' : '☾'}
         </button>
         <button type="button" className="primary" onClick={onShare}>
           Share link

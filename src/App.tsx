@@ -23,6 +23,7 @@ import { FIELD_TYPES } from './schema/fieldTypes'
 import { TEMPLATES } from './schema/templates'
 import type { FieldType, FormSchema } from './schema/types'
 import { builderReducer, initialState } from './state/builder'
+import { applyTheme, initialTheme, type Theme } from './theme'
 import { decodeShare, encodeShare, loadDraft, parseSchema, saveDraft, toJson } from './io/schemaIO'
 
 const SHARE_PREFIX = '#form='
@@ -39,6 +40,12 @@ export default function App() {
   const [toast, setToast] = useState<string | null>(null)
   const [dragType, setDragType] = useState<FieldType | null>(null)
   const [dropTargetId, setDropTargetId] = useState<string | null>(null)
+  const [theme, setTheme] = useState<Theme>(initialTheme)
+
+  const changeTheme = (next: Theme) => {
+    applyTheme(next)
+    setTheme(next)
+  }
 
   const notify = useCallback((message: string) => setToast(message), [])
   useEffect(() => {
@@ -161,6 +168,8 @@ export default function App() {
         onImport={importFile}
         onExport={exportJson}
         onShare={share}
+        theme={theme}
+        onThemeChange={changeTheme}
       />
 
       {mode === 'build' ? (
